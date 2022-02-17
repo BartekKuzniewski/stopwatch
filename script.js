@@ -61,11 +61,23 @@ const handleReset = () => {
 const clearStuff = () => {
 	clearInterval(countTime);
 	stopwatch.textContent = `0:00`;
+    timeList.textContent = ''
 	seconds = 0;
 	minutes = 0;
 };
+
+const showArchive = () => {
+    let i = 1;
+    timesArr.forEach( time => {
+        const newTime = document.createElement('li');
+        newTime.innerHTML = `Pomiar nr ${i}: <span>${time}</span>`
+        timeList.appendChild(newTime);
+        i++
+    })
+}
 
 startBtn.addEventListener('click', handleStart);
 pauseBtn.addEventListener('click', handlePause);
 stopBtn.addEventListener('click', handleStop);
 resetBtn.addEventListener('click', handleReset);
+archiveBtn.addEventListener('click', showArchive);
