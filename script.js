@@ -45,16 +45,27 @@ const handleStop = () => {
 		console.log(timesArr);
 	}
 
-	clearInterval(countTime);
-	stopwatch.textContent = `0:00`;
-    seconds = 0;
-    minutes = 0;
+    clearStuff()
 };
 
 const handlePause = () => {
 	clearInterval(countTime);
 };
 
+const handleReset = () => {
+    timeMeasurement.style.visibility = 'hidden';
+    timesArr = [];
+    clearStuff()
+};
+
+const clearStuff = () => {
+	clearInterval(countTime);
+	stopwatch.textContent = `0:00`;
+	seconds = 0;
+	minutes = 0;
+};
+
 startBtn.addEventListener('click', handleStart);
 pauseBtn.addEventListener('click', handlePause);
 stopBtn.addEventListener('click', handleStop);
+resetBtn.addEventListener('click', handleReset);
