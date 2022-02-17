@@ -9,7 +9,7 @@ const stopwatch = document.querySelector('.stopwatch');
 const timeMeasurement = document.querySelector('.time');
 const timeList = document.querySelector('.time-list');
 
-const modelShadow = document.querySelector('.modal-shadow');
+const modalShadow = document.querySelector('.modal-shadow');
 const closeModalBtn = document.querySelector('.close');
 
 let countTime;
@@ -45,7 +45,7 @@ const handleStop = () => {
 		console.log(timesArr);
 	}
 
-    clearStuff()
+	clearStuff();
 };
 
 const handlePause = () => {
@@ -53,31 +53,45 @@ const handlePause = () => {
 };
 
 const handleReset = () => {
-    timeMeasurement.style.visibility = 'hidden';
-    timesArr = [];
-    clearStuff()
+	timeMeasurement.style.visibility = 'hidden';
+	timesArr = [];
+	clearStuff();
 };
 
 const clearStuff = () => {
 	clearInterval(countTime);
 	stopwatch.textContent = `0:00`;
-    timeList.textContent = ''
+	timeList.textContent = '';
 	seconds = 0;
 	minutes = 0;
 };
 
 const showArchive = () => {
-    let i = 1;
-    timesArr.forEach( time => {
-        const newTime = document.createElement('li');
-        newTime.innerHTML = `Pomiar nr ${i}: <span>${time}</span>`
-        timeList.appendChild(newTime);
-        i++
-    })
-}
+    timeList.textContent = '';
+	let i = 1;
+	timesArr.forEach((time) => {
+		const newTime = document.createElement('li');
+		newTime.innerHTML = `Pomiar nr ${i}: <span>${time}</span>`;
+		timeList.appendChild(newTime);
+		i++;
+	});
+};
+
+const showModal = () => {
+	if (!(modalShadow.style.display === 'block')) {
+		modalShadow.style.display = 'block';
+	} else {
+        modalShadow.style.display = 'none';
+	}
+
+    modalShadow.classList.toggle('modal-animation');
+};
 
 startBtn.addEventListener('click', handleStart);
 pauseBtn.addEventListener('click', handlePause);
 stopBtn.addEventListener('click', handleStop);
 resetBtn.addEventListener('click', handleReset);
 archiveBtn.addEventListener('click', showArchive);
+infoIcon.addEventListener('click', showModal);
+closeModalBtn.addEventListener('click', showModal);
+window.addEventListener('click', e => e.target === modalShadow ? showModal() : false) 
