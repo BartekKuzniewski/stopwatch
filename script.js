@@ -16,29 +16,45 @@ let countTime;
 let minutes = 0;
 let seconds = 0;
 
-const handleStart = () => {
+let timesArr = [];
 
-    clearInterval(countTime)
+const handleStart = () => {
+	clearInterval(countTime);
 
 	countTime = setInterval(() => {
-		
 		if (seconds < 9) {
-            seconds++;
+			seconds++;
 			stopwatch.textContent = `${minutes}:0${seconds}`;
 		} else if (seconds >= 9 && seconds < 59) {
-            seconds++;
-            stopwatch.textContent = `${minutes}:${seconds}`;
-        } else {
-            minutes++
-            seconds = 0
-            stopwatch.textContent = `${minutes}:0${seconds}`
-        }
+			seconds++;
+			stopwatch.textContent = `${minutes}:${seconds}`;
+		} else {
+			minutes++;
+			seconds = 0;
+			stopwatch.textContent = `${minutes}:0${seconds}`;
+		}
 	}, 500);
 };
 
+const handleStop = () => {
+	timeMeasurement.innerHTML = `Ostatni czas: ${stopwatch.textContent}`;
+
+	if (stopwatch.textContent !== '0:00') {
+		timeMeasurement.style.visibility = 'visible';
+		timesArr.push(stopwatch.textContent);
+		console.log(timesArr);
+	}
+
+	clearInterval(countTime);
+	stopwatch.textContent = `0:00`;
+    seconds = 0;
+    minutes = 0;
+};
+
 const handlePause = () => {
-    clearInterval(countTime)
-}
+	clearInterval(countTime);
+};
 
 startBtn.addEventListener('click', handleStart);
-pauseBtn.addEventListener('click', handlePause)
+pauseBtn.addEventListener('click', handlePause);
+stopBtn.addEventListener('click', handleStop);
