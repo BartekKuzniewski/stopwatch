@@ -33,7 +33,7 @@ const handleStart = () => {
 			seconds = 0;
 			stopwatch.textContent = `${minutes}:0${seconds}`;
 		}
-	}, 500);
+	}, 1000);
 };
 
 const handleStop = () => {
@@ -44,7 +44,6 @@ const handleStop = () => {
 		timesArr.push(stopwatch.textContent);
 		console.log(timesArr);
 	}
-
 	clearStuff();
 };
 
